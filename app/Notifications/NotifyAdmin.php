@@ -41,8 +41,15 @@ class NotifyAdmin extends Notification
      */
     public function toMail($notifiable)
     {
+        $text = null;
+        if($this->user->role_id == 1){
+            $text = 'new user '.$this->user->email.' has registered on our site';
+        }
+        if($this->user->role_id == 2){
+            $text = 'new vendor '.$this->user->email.' has registered on our site';
+        }
         return (new MailMessage)
-                    ->line('new user has registered on our site')
+                    ->line($text)
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }

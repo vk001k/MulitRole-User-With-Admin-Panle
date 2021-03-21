@@ -178,7 +178,7 @@
                                     <label for="phone_no" class="col-md-4 col-form-label text-md-right">{{ __('Phone No') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="phone_no" type="number" class="form-control vendor_validate" name="phone_no" placeholder="enter 10 digit phone number">
+                                        <input id="phone_no"  type="number" class="form-control vendor_validate" name="phone_no" placeholder="enter 10 digit phone number">
 
                                         @error('phone_no')
                                         <span class="invalid-feedback" role="alert">

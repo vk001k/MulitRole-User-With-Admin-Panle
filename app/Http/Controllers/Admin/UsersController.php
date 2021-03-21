@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Notifications\NotifyAdmin;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,11 +101,16 @@ class UsersController extends Controller
         $id->lname = $request->lname;
         $id->email = $request->email;
         $id->address = $request->address;
+        $id->google_id = '';
+        $id->facebook_id = '';
         if(!empty($request->password)){
             $id->password = Hash::make($request->password);
         }
         $id->save();
 
+        //notify admin
+        $admin = User::where('role_id',3)->first();
+        $admin->notify(new NotifyAdmin($id));
         return redirect(url('admin/users'))->with('success','User updated successfully');
     }
 

@@ -80,6 +80,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'address' => $data['address'],
             'reg_by'=>'Web',
+            'google_id'=>'',
+            'facebook_id'=>'',
             'password' => Hash::make($data['password']),
         ]);
 
@@ -117,7 +119,9 @@ class RegisterController extends Controller
             $vendorDetails->save();
         }
 
-        $user->notify(new NotifyAdmin($user));
+        //notify admin
+        $admin = User::where('role_id',3)->first();
+        $admin->notify(new NotifyAdmin($user));
         return $user;
     }
 }

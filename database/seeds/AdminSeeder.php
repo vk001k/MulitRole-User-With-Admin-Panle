@@ -16,9 +16,12 @@ class AdminSeeder extends Seeder
             'role_id' => '3',
             'fname' => 'Admin',
             'lname' =>'1',
-            'email' => 'admin@admin.com',
+            'email' => 'admin@yopmail.com',
             'reg_by' => 'Web',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('123456789'),
+            'address' =>'',
+            'google_id' =>'',
+            'facebook_id' =>'',
         ]);
     }
 }

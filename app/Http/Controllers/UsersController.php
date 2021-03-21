@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\NotifyAdmin;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,13 @@ class UsersController extends Controller
         if(!empty($request->password)){
             $id->password = Hash::make($request->password);
         }
+        $id->google_id = '';
+        $id->facebook_id = '';
         $id->save();
+
+        //notify admin
+        $admin = User::where('role_id',3)->first();
+        $admin->notify(new NotifyAdmin($id));
         return redirect()->back()->with('success','User Updated successfully');
     }
 }
